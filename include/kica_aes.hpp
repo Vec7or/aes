@@ -45,6 +45,12 @@ private:
         }
     }
 
+    inline constexpr std::array<std::byte, blockSize> shiftRows(std::array<std::byte, blockSize> data)
+    {
+        std::array<std::byte, blockSize> newData{data[0], data[5], data[10], data[15], data[4], data[9], data[14], data[3], data[8], data[13], data[2], data[7], data[12], data[1], data[6], data[11]};
+        return newData;
+    }
+
 public:
     constexpr KicaAES() {}
 
@@ -53,6 +59,11 @@ public:
         auto subkeys = SubkeyFactory<KEY_SIZE>::calculateSubkeys(key);
         for (size_t i = 0; i < subkeys.size(); i++)
         {
+            for (size_t j = 0; j < data.size(); j++)
+            {
+                data[j] = SBox::forward(data[j]);
+            }
+            data = shiftRows(data);
             std::cout << std::string{"Subkey Round: "} << std::to_string(i) << std::endl;
             printByteArray(subkeys[i]);
         }

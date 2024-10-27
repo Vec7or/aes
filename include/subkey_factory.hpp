@@ -14,16 +14,16 @@ class SubkeyFactory
                   "Unsuported AES keysize selected");
 
 private:
-    static inline constexpr size_t getRounds()
+    static inline constexpr size_t getIterations()
     {
         switch (KEY_SIZE)
         {
         case AES_128:
             return 10;
         case AES_196:
-            return 12;
+            return 8;
         case AES_256:
-            return 14;
+            return 7;
         default:
             return 0;
         }
@@ -94,9 +94,9 @@ private:
 public:
     static constexpr auto calculateSubkeys(std::array<std::byte, static_cast<size_t>(KEY_SIZE)> key)
     {
-        std::array<std::array<std::byte, static_cast<size_t>(KEY_SIZE)>, getRounds() + 1> subkeys{};
+        std::array<std::array<std::byte, static_cast<size_t>(KEY_SIZE)>, getIterations() + 1> subkeys{};
         subkeys[0] = key;
-        for (size_t i = 1; i < getRounds() + 1; i++)
+        for (size_t i = 1; i < getIterations() + 1; i++)
         {
             subkeys[i] = getSubkey(i, subkeys[i - 1]);
         }
