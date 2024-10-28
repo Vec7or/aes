@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)  # CMake version check
+cmake_minimum_required(VERSION 3.16)  # CMake version check
 project(kica_aes)                     # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++20 standard
 

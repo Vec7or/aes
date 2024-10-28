@@ -1,0 +1,66 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    // It is recommend to add shortcut for running tasks (runTask),
+    // to make the most out of the tasks functionality
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "args": [
+                        "-i"
+                    ]
+                }
+            },
+            "command": "./scripts/build.sh",
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [
+                "$clang"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "args": [
+                        "-i"
+                    ]
+                }
+            },
+            "command": "./scripts/run.sh",
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [],
+            "group": {}
+        },
+        {
+            "label": "Build and run",
+            "type": "shell",
+            "options": {
+                "shell": {
+                    "args": [
+                        "-i"
+                    ]
+                }
+            },
+            "command": "./scripts/build.sh && ./scripts/run.sh",
+            "presentation": {
+                "reveal": "always",
+            },
+            "problemMatcher": [],
+            "group": {}
+        }
+    ],
+    "inputs": []
+}
