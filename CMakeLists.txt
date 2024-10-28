@@ -3,7 +3,7 @@ project(kica_aes)                     # Create project "simple_example"
 set(CMAKE_CXX_STANDARD 20)            # Enable c++20 standard
 
 # Add main.cpp file of the project root directory as a source file
-set(SOURCE_FILES src/kica_aes.cpp src/main.cpp)
+set(SOURCE_FILES src/main.cpp)
 
 # Add include files
 include_directories(include)
