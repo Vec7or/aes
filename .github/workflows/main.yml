@@ -1,0 +1,91 @@
+---
+on: push  # yamllint disable-line rule:truthy
+jobs:
+  gitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # fetch everything
+      - id: gitlint-step
+        uses: ./.github/actions/gitlint
+      - run: >
+          printf ${{ toJSON(steps.gitlint-step.outputs.diagnostic) }}
+          >> $GITHUB_STEP_SUMMARY
+        if: always()
+  gitspell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # fetch everything
+      - id: gitspell-step
+        uses: ./.github/actions/gitspell
+      - run: >
+          printf ${{ toJSON(steps.gitspell-step.outputs.diagnostic) }}
+          >> $GITHUB_STEP_SUMMARY
+        if: always()
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/yamllint
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/shellcheck
+  jq_valid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/jq_valid
+  jq_format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/jq_format
+  cspell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/cspell
+  shfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/shfmt
+  yamlfix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/yamlfix
+  mdformat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/mdformat
+  clangformat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/clangformat
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-build
+          path: build/
+  clangtidy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: app-build
+          path: build/
+      - uses: ./.github/actions/clangtidy

@@ -1,0 +1,10 @@
+---
+name: yamllint
+description: Lints all yaml files in repo
+runs:
+  using: composite
+  steps:
+    - run: pip install yamllint
+      shell: bash
+    - run: ./scripts/workflows/yamllint.sh
+      shell: bash

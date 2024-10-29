@@ -1,0 +1,12 @@
+---
+name: jq_format
+description: Checks formatting of .json files with jq
+runs:
+  using: composite
+  steps:
+    - run: sudo apt-get install jq -y
+      shell: bash
+    - run: echo "::add-matcher::.github/matchers/fmt.json"
+      shell: bash
+    - run: ./scripts/workflows/jq_format.sh
+      shell: bash

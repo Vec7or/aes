@@ -32,7 +32,7 @@
 *.app
 
 # Build assets
-build
+/build/
 
 # Assets
 *.pdf

@@ -1,0 +1,10 @@
+---
+name: build
+description: Builds the library
+runs:
+  using: composite
+  steps:
+    - run: sudo apt-get install clang -y
+      shell: bash
+    - run: ./scripts/build.sh
+      shell: bash

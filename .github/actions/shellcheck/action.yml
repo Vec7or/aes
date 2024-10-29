@@ -1,0 +1,12 @@
+---
+name: shellcheck
+description: Checks all shell scripts in repo
+runs:
+  using: composite
+  steps:
+    - run: sudo apt-get install shellcheck -y
+      shell: bash
+    - run: echo "::add-matcher::.github/matchers/shellcheck.json"
+      shell: bash
+    - run: ./scripts/workflows/shellcheck.sh -f gcc
+      shell: bash

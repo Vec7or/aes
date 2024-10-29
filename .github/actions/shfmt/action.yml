@@ -1,0 +1,12 @@
+---
+name: shfmt
+description: Checks formatting of shell scripts with shfmt
+runs:
+  using: composite
+  steps:
+    - run: sudo apt-get install shfmt -y
+      shell: bash
+    - run: echo "::add-matcher::.github/matchers/fmt.json"
+      shell: bash
+    - run: ./scripts/workflows/shfmt.sh
+      shell: bash

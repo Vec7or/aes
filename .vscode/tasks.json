@@ -1,66 +1,96 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    // It is recommend to add shortcut for running tasks (runTask),
-    // to make the most out of the tasks functionality
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Build",
-            "type": "shell",
-            "options": {
-                "shell": {
-                    "args": [
-                        "-i"
-                    ]
-                }
-            },
-            "command": "./scripts/build.sh",
-            "presentation": {
-                "reveal": "always",
-            },
-            "problemMatcher": [
-                "$clang"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        },
-        {
-            "label": "Run",
-            "type": "shell",
-            "options": {
-                "shell": {
-                    "args": [
-                        "-i"
-                    ]
-                }
-            },
-            "command": "./scripts/run.sh",
-            "presentation": {
-                "reveal": "always",
-            },
-            "problemMatcher": [],
-            "group": {}
-        },
-        {
-            "label": "Build and run",
-            "type": "shell",
-            "options": {
-                "shell": {
-                    "args": [
-                        "-i"
-                    ]
-                }
-            },
-            "command": "./scripts/build.sh && ./scripts/run.sh",
-            "presentation": {
-                "reveal": "always",
-            },
-            "problemMatcher": [],
-            "group": {}
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "args": [
+            "-i"
+          ]
         }
-    ],
-    "inputs": []
+      },
+      "command": "./scripts/run_in_docker.sh ./scripts/build.sh",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": [
+        "$clang"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Run",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "args": [
+            "-i"
+          ]
+        }
+      },
+      "command": "./scripts/run_in_docker.sh ./scripts/run.sh",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "group": {}
+    },
+    {
+      "label": "Build and run",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "args": [
+            "-i"
+          ]
+        }
+      },
+      "command": "./scripts/run_in_docker.sh bash -c \"./scripts/build.sh && ./scripts/run.sh\"",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "group": {}
+    },
+    {
+      "label": "Format",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "args": [
+            "-i"
+          ]
+        }
+      },
+      "command": "./scripts/run_in_docker.sh ./scripts/workflows/clangformat.sh --diff",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "group": {}
+    },
+    {
+      "label": "Format with fix",
+      "type": "shell",
+      "options": {
+        "shell": {
+          "args": [
+            "-i"
+          ]
+        }
+      },
+      "command": "./scripts/run_in_docker.sh ./scripts/workflows/clangformat.sh --apply",
+      "presentation": {
+        "reveal": "always"
+      },
+      "problemMatcher": [],
+      "group": {}
+    }
+  ],
+  "inputs": []
 }

@@ -1,0 +1,7 @@
+gitlint
+gitspell
+shellcheck
+shfmt
+yamlfix
+mdformat
+subkey

@@ -1,0 +1,10 @@
+---
+name: clang_format
+description: Checks format of all cpp and hpp files in repo
+runs:
+  using: composite
+  steps:
+    - run: pip install clang-tidy
+      shell: bash
+    - run: ./scripts/workflows/clangtidy.sh --diff
+      shell: bash

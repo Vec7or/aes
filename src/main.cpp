@@ -1,5 +1,5 @@
+#include "kica_aes.hpp"
 #include <iostream>
-#include <kica_aes.hpp>
 #include <string>
 
 int main(int argc, char const *argv[]) {
@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
       std::byte{0x09}, std::byte{0x0a}, std::byte{0x0b}, std::byte{0x0c},
       std::byte{0x0d}, std::byte{0x0e}, std::byte{0x0f}, std::byte{0x10}};
   auto data = std::array<std::byte, 16>{std::byte{1}};
-  aes.encryptBlock(key, data)[0];
+  (void)aes.encryptBlock(key, data)[0];
   // std::byte res = SBox::inverser(std::byte{0x01});
   // std::cout << std::hex << std::showbase << static_cast<int>(res) <<
   // std::endl;
